@@ -1,21 +1,32 @@
 # api-demo
 API Demo
 
+### Descripción
 Proyecto de prueba de una API para el consumo de una interfaz gráfica. Construido con FastAPI y MongoDB con soporte asíncrono mediante `moto`.
 
 Para ejecutar el proyecto se necesita disponer de una instalación de python con una versión 3.8+ y mongoDB 5+ para la explotación del uso de las series temporales.
 
+### Instalación
 * Crear un entorno virtual e instalar las dependencias sobre el directorio del repo
-    `python3 -m venv venv` <br/>
-    `source venv/bin/activate` <br/>
-    `pip3 install -r requirements.txt`
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    pip3 install -r requirements.txt
+    ```
 * Setear las variables de entorno para la conexión a la base de datos <br/>
-    `export URI=tuuri DATABASE=tubasededatos`
-* Ejecutar el `setup.py` para preparar los datos e insertarlos en la base de datos.
-    `python3 setup.py`
-* Ejecutar la aplicación usando uvicorn, el servidor asíncrono comunmente usado con FastAPI    
-    `uvicorn app.main:app`
+    ``` bash
+    export URI=tuuri DATABASE=tubasededatos
+    ```
+* Ejecutar `setup.py` para preparar los datos e insertarlos en la base de datos.
+    ``` bash
+    python3 setup.py
+    ```
+* Ejecutar la aplicación usando uvicorn, el servidor asíncrono comunmente usado con FastAPI
+    ``` bash
+    uvicorn app.main:app
+    ```
 
+### Uso
 Ir a alguno de los _end points_ habilitados (todos los endpoints necesitan un identificador del cliente concreto, en este caso hemos usado `1` como prueba). El detalle de los parámetros y pares clave valor se puede encontrar en la documentación asociada de Swagger en `.../docs`:
 * `.../range-detail/{field}` devuelve para un campo específico el detalle máximo de granularidad temporal incluído en un rango temporal. <br/>
     Ejemplo: <br/>
@@ -36,8 +47,10 @@ Ir a alguno de los _end points_ habilitados (todos los endpoints necesitan un id
     "timestamp": "2019-10-15T00:30:00.000Z",
     "value": 16.928,
     "unit": "kW"
+  },
+  {
+      "goesOn": "the data goes on..."
   }
-  ...
   ]
     ```
 * `.../day-aggregated/{field}` devuelve para un campo específico el detalle agregado por día dentro de un rango especificado. <br/>
@@ -180,7 +193,7 @@ Ir a alguno de los _end points_ habilitados (todos los endpoints necesitan un id
   }
   ```
 
-
+### Comentarios y mejoras
 Se decide utilizar un framework, FastAPI, con capacidad asíncrona para poder cargar de manera no bloqueante las distintas tablas de la interfaz. Se decide utilizar mongoDB 5+ por su capacidad para tratar con series temporales, lo cual permite realizar agregaciones en ventanas temporales y devolver los datos en un formato muy amigable para el intercambio de información web, por ser muy cercano a JSON.
 
 Como mejora se podrían dockerizar las aplicaciones, implementar un sistema de caching con `Redis` y autenticación mediante `oauth2`. Diseñar una buena batería de test unitarios usando `pytest`.
