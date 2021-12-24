@@ -196,4 +196,4 @@ Ir a alguno de los _end points_ habilitados (todos los endpoints necesitan un id
 ### Comentarios y mejoras
 Se decide utilizar un framework, FastAPI, con capacidad asíncrona para poder cargar de manera no bloqueante las distintas tablas de la interfaz. Se decide utilizar mongoDB 5+ por su capacidad para tratar con series temporales, lo cual permite realizar agregaciones en ventanas temporales y devolver los datos en un formato muy amigable para el intercambio de información web, por ser muy cercano a JSON.
 
-Como mejora se podrían dockerizar las aplicaciones, implementar un sistema de caching con `Redis` y autenticación mediante `oauth2`. Diseñar una buena batería de test unitarios usando `pytest`.
+Como mejora se podrían dockerizar las aplicaciones, implementar un sistema de caching con `Redis` y autenticación mediante `oauth2`. Diseñar una buena batería de test unitarios usando `pytest`. Mejorar el manejo de excepciones, generando nuevas con un significado más concreto, detallar el logging para una mejor experiencia en el debugging y crear modelos pydantic de respuesta API, así se complementaría también la documentación autogenerada por FastAPI.
